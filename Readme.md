@@ -76,3 +76,12 @@ docker run -p 8080:8080 -d server:1.0
 for running the container.
 
 ![The commands](images/logs.PNG)
+
+## Patr - 2
+
+#### 1. I created a cluster in a bash script
+
+#### 2. You can see the attached terraform files
+#### 3. I did all these requirements in the bash script
+
+![namespace](images/3.PNG)
