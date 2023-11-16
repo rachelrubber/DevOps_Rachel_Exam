@@ -51,5 +51,6 @@ resource "kubernetes_service" "nginx" {
       port        = var.service_ports[0]
       target_port = var.service_ports[0]
     }
+    type = "LoadBalancer"
   }
 }

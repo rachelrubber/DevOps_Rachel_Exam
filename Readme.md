@@ -61,7 +61,7 @@ REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
 server       v1.0      c4bce217802e   9 minutes ago   912MB
 ```
 
-#### .3 Then I ran:
+#### .3 I then ran:
 
 `
 docker tag server server:1.0 
@@ -102,3 +102,105 @@ tunnels:
 authtoken: 2YGM982dN4Oe4XX8hVqcQ9RcFEA_7EpFGzgJeMaS64UbKXAbm
 ```
 I checked why that is. And that's because of the antivirus I have on my computer
+
+## Bonus questions
+* Docker
+bash:
+```
+export DOCKER_CLI_EXPERIMENTAL=enabled
+docker build --platform darwin -t your_image_name:tag .
+```
+* Terraform
+#### 2. I did
+#### 3.
+- Navigated to the directory where your Terraform configuration files were located- to setup
+- Then Ran the following command:
+`
+terraform console
+`
+- Once the console was open, you could test and debug your local variables or module outputs
+(for example module.kubernetes.taxes_namespace)
+- If I want to see the values of local variables or outputs during a terraform apply, I could use the -var flag to set variable values and then observe the output
+
+* K8S
+
+I have to install MetalLB in my Kubernetes cluster
+
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: metallb-system
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: metallb-system
+  name: controller
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: metallb-system:controller
+rules:
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: metallb-system:controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: metallb-system:controller
+subjects:
+- kind: ServiceAccount
+  name: controller
+  namespace: metallb-system
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 192.168.1.240-192.168.1.250
+
+```
+Then run:
+`
+kubectl apply -f metallb.yaml
+`
+
+I then updated the Terraform Kubernetes configuration to expose the Nginx service with the LoadBalancer type. I changed the main.tf file accordingly:
+
+```
+...
+  port {
+      port        = var.service_ports[0]
+      target_port = var.service_ports[0]
+    }
+
+    type = "LoadBalancer"
+  }
+  ...
+```
+
+
+## Thank you
+### I enjoyed the exam
+### Have a pleasant exam

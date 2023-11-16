@@ -3,10 +3,10 @@
 ##I started Minikube (assumed GCP as the driver, adjusted accordingly)
 minikube start --driver=gcp
 
-#Then I set the KUBECONFIG environment variable to point to the Kubernetes configuration
+#I then set the KUBECONFIG environment variable to point to the Kubernetes configuration
 export KUBECONFIG=~/.kube/config
 
-#Then I ran Terraform to deploy resources
+#I then ran Terraform to deploy resources
 terraform init
 terraform apply -auto-approve
 
