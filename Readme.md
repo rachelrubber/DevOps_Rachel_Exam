@@ -75,3 +75,4 @@ docker run -p 8080:8080 -d server:1.0
 
 for running the container.
 
+![The commands](images/logs.PNG)
