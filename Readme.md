@@ -85,3 +85,20 @@ for running the container.
 #### 3. I did all these requirements in the bash script
 
 ![namespace](images/3.PNG)
+
+## Part 3
+I got this:
+
+![ngrok](images/4.PNG)
+
+and this is my config file
+
+```
+version: 2
+tunnels:
+    your_tunnel_name:
+        proto: http
+        addr: 8080
+authtoken: 2YGM982dN4Oe4XX8hVqcQ9RcFEA_7EpFGzgJeMaS64UbKXAbm
+```
+I checked why that is. And that's because of the antivirus I have on my computer
