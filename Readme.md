@@ -203,4 +203,4 @@ I then updated the Terraform Kubernetes configuration to expose the Nginx servic
 
 ## Thank you
 ### I enjoyed the exam
-### Have a pleasant exam
+### Have a pleasant exam check
